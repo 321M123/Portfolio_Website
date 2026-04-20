@@ -5,42 +5,51 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, anima
 import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import Shuffle from '@/components/ui/shadcn-io/shuffle';
 
-// OneSheet project data with 3 gradient placeholder images
 const oneSheetProject = {
   title: 'OneSheet',
+  leadLine: {
+    emphasis: 'Data-Driven Investment Copilot',
+    tail: 'Stop switching between spreadsheets and brokerage apps.',
+  },
   description:
-    'A revolutionary platform currently in development, bringing innovation to financial document management and analysis.',
-  tech: ['TypeScript', 'React', 'APIs & Scraping', 'VISX', 'Authentication', 'Payment'],
+    'OneSheet combines institutional-grade fundamental research with automated portfolio tracking, giving quality investors an all-in-one terminal for everything.',
+  tech: ['TypeScript', 'React', 'Next.js', 'APIs & Scraping', 'VISX', 'Authentication', 'Payments'],
+  stats: [
+    { value: '25+', label: 'Broker Integrations' },
+    { value: '1,000+', label: 'Stocks Covered' },
+    { value: '$12', label: 'Per Month' },
+  ],
   images: [
     {
       id: 1,
-      gradient: 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500',
-      label: 'Onesheet PRO Image A',
+      label: 'Onesheet PRO – Portfolio',
       image: '/onesheetImageA.png',
     },
     {
       id: 2,
-      gradient: 'bg-gradient-to-br from-green-400 via-blue-500 to-purple-600',
-      label: 'Onesheet PRO Image B',
+      label: 'Onesheet PRO – KPIs & Research',
       image: '/onesheetImageB.png',
     },
     {
       id: 3,
-      gradient: 'bg-gradient-to-br from-orange-400 via-pink-500 to-red-600',
-      label: 'Onesheet PRO Image C',
+      label: 'Onesheet PRO – Radar & Watchlist',
       image: '/onesheetImageC.png',
     },
   ],
-  link: 'https://onesheet.pro',
+  links: {
+    primary: 'https://onesheet.pro',
+    trial: 'https://app.onesheet.pro/signup',
+    kpi: 'https://onesheet.pro/kpi',
+  },
 };
 
 export function FeaturedProjectsSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [displayText, setDisplayText] = useState('Discover Onesheet PRO');
+  const [displayText, setDisplayText] = useState('Visit onesheet.pro');
   const [shinePosition, setShinePosition] = useState({ x: 50, y: 50 });
-  const originalText = 'Discover Onesheet PRO';
+  const originalText = 'Visit onesheet.pro';
   const cardRef = useRef<HTMLDivElement>(null);
 
   const totalSlides = oneSheetProject.images.length;
@@ -68,7 +77,6 @@ export function FeaturedProjectsSection() {
     x.set(xPct);
     y.set(yPct);
 
-    // Update shine position
     setShinePosition({
       x: (mouseX / width) * 100,
       y: (mouseY / height) * 100,
@@ -76,38 +84,26 @@ export function FeaturedProjectsSection() {
   };
 
   const handleMouseLeave = () => {
-    // Smoothly animate motion values back to center (0, 0) which maps to 0deg rotation
     animate(x, 0, { duration: 0.3, type: 'spring', stiffness: 400, damping: 30 });
     animate(y, 0, { duration: 0.3, type: 'spring', stiffness: 400, damping: 30 });
-    // Reset shine position to center
     setShinePosition({ x: 50, y: 50 });
   };
 
-  // Auto-play functionality
+  // Auto-play
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      }, 3000); // 3 seconds per slide
-
+      }, 3000);
       return () => clearInterval(interval);
     }
   }, [isPaused, totalSlides]);
 
-  // Navigation handlers
-  const goToPrevious = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
+  const goToPrevious = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  const goToNext = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  const goToSlide = (index: number) => setCurrentSlide(index);
 
-  const goToNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  // Slot machine effect
+  // Slot machine effect on CTA hover
   useEffect(() => {
     if (!isHovering) {
       setDisplayText(originalText);
@@ -117,34 +113,27 @@ export function FeaturedProjectsSection() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
     let frameCount = 0;
     const maxFrames = 60;
-    const revealDelay = 3; // Frames between each character locking in
+    const revealDelay = 3;
 
     const interval = setInterval(() => {
       const textArray = originalText.split('');
-      let charIndex = 0; // Track actual character position (excluding spaces)
+      let charIndex = 0;
 
       setDisplayText(
         textArray
           .map((char) => {
-            if (char === ' ') return ' ';
-
-            // Calculate when this character should lock in
+            if (char === ' ' || char === '.') return char;
             const lockFrame = charIndex * revealDelay;
             charIndex++;
-
-            // If we haven't reached this character's lock frame, keep spinning
             if (frameCount < lockFrame) {
               return characters[Math.floor(Math.random() * characters.length)];
-            } else {
-              // Character is locked in, show the correct character
-              return char;
             }
+            return char;
           })
-          .join('')
+          .join(''),
       );
 
       frameCount++;
-
       if (frameCount >= maxFrames) {
         clearInterval(interval);
         setDisplayText(originalText);
@@ -155,39 +144,71 @@ export function FeaturedProjectsSection() {
   }, [isHovering, originalText]);
 
   return (
-    <section className="py-20 relative bg-black">
+    <section id="onesheet" className="py-24 relative bg-black">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="space-y-12">
-          {/* Section Title */}
-          <div className="flex items-center justify-center gap-3">
-            <div className="text-center">
-              <Shuffle
-                text="OneSheet"
-                shuffleDirection="right"
-                duration={0.5}
-                animationMode="evenodd"
-                shuffleTimes={2}
-                ease="power3.out"
-                stagger={0.05}
-                threshold={0.1}
-                triggerOnce={false}
-                triggerOnHover={true}
-                respectReducedMotion={true}
-                className="text-foreground"
-                style={{
-                  fontSize: 'clamp(2rem, 8vw, 4rem)',
-                  fontFamily: 'inherit',
-                }}
-              />
+          className="space-y-16">
+          {/* Header */}
+          <div className="text-center space-y-4">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-blue-500 text-sm font-semibold tracking-widest uppercase">
+              Featured Project
+            </motion.p>
+            <Shuffle
+              text="OneSheet"
+              shuffleDirection="right"
+              duration={0.5}
+              animationMode="evenodd"
+              shuffleTimes={2}
+              ease="power3.out"
+              stagger={0.05}
+              threshold={0.1}
+              triggerOnce={false}
+              triggerOnHover={true}
+              respectReducedMotion={true}
+              className="text-foreground"
+              style={{
+                fontSize: 'clamp(2.5rem, 9vw, 5rem)',
+                fontFamily: 'inherit',
+                display: 'block',
+              }}
+            />
+            <div className="text-gray-400 text-lg md:text-xl max-w-5xl mx-auto leading-relaxed space-y-4">
+              <p className="text-base sm:text-lg md:text-xl md:whitespace-nowrap">
+                <span className="text-white font-medium">{oneSheetProject.leadLine.emphasis}</span>
+                <span className="text-gray-500"> — </span>
+                {oneSheetProject.leadLine.tail}
+              </p>
+              <div className="border-t border-neutral-800 pt-4">
+                <p>{oneSheetProject.description}</p>
+              </div>
             </div>
           </div>
 
-          {/* Carousel Container with 3D Hover Card */}
+          {/* Stats Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-neutral-800 rounded-2xl overflow-hidden max-w-3xl mx-auto border border-neutral-800">
+            {oneSheetProject.stats.map((stat, i) => (
+              <div key={i} className="bg-neutral-900/80 px-6 py-5 text-center">
+                <p className="text-3xl font-bold text-white tracking-tight">{stat.value}</p>
+                <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Carousel */}
           <div
             ref={cardRef}
             className="relative max-w-5xl mx-auto"
@@ -198,7 +219,6 @@ export function FeaturedProjectsSection() {
             }}
             onMouseMove={handleMouseMove}
             style={{ perspective: '1000px' }}>
-            {/* 3D Hover Card */}
             <motion.div
               style={{
                 rotateX,
@@ -206,7 +226,6 @@ export function FeaturedProjectsSection() {
                 transformStyle: 'preserve-3d',
               }}
               className="relative h-[400px] md:h-[500px] lg:h-[600px]">
-              {/* Carousel Slides */}
               <div className="relative w-full h-full overflow-hidden rounded-3xl flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -232,7 +251,24 @@ export function FeaturedProjectsSection() {
                 </AnimatePresence>
               </div>
 
-              {/* 3D Shine Effect */}
+              {/* Slide caption */}
+              <div
+                className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+                style={{ transform: 'translateZ(60px) translateX(-50%)' }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentSlide}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs text-white/50 tracking-wider uppercase bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+                    {oneSheetProject.images[currentSlide].label}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+
+              {/* Shine */}
               <motion.div
                 className="absolute inset-0 rounded-3xl pointer-events-none overflow-hidden"
                 style={{
@@ -267,7 +303,7 @@ export function FeaturedProjectsSection() {
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Dot Indicators */}
+            {/* Dots */}
             <div
               className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3"
               onMouseEnter={handleMouseLeave}
@@ -279,8 +315,8 @@ export function FeaturedProjectsSection() {
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/60'
+                  className={`h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/60 w-3'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -288,16 +324,14 @@ export function FeaturedProjectsSection() {
             </div>
           </div>
 
-          {/* Project Description */}
+          {/* Tech + CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center space-y-6">
-            <p className="text-gray-300 text-lg">{oneSheetProject.description}</p>
-
-            {/* Tech Stack */}
+            className="max-w-3xl mx-auto text-center space-y-8">
+            {/* Tech pills */}
             <div className="flex flex-wrap justify-center gap-2">
               {oneSheetProject.tech.map((tech, index) => (
                 <span
@@ -308,19 +342,30 @@ export function FeaturedProjectsSection() {
               ))}
             </div>
 
-            {/* Discover Button */}
-            <div className="flex justify-center pt-4">
+            {/* CTA cluster */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              {/* Primary CTA with slot machine */}
               <a
-                href={oneSheetProject.link}
+                href={oneSheetProject.links.primary}
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 className="flex items-center gap-3 px-6 py-4 bg-[#242828] hover:bg-[#2d3232] text-white font-semibold rounded-full transition-all duration-300 group">
-                <span className="font-mono tracking-wider min-w-[200px] text-center">{displayText}</span>
+                <span className="font-mono tracking-wider min-w-[170px] text-center">{displayText}</span>
                 <div className="bg-[#343A3A] group-hover:bg-[#3d4444] p-2 rounded-lg transition-colors duration-300">
                   <ArrowUpRight className="w-5 h-5" />
                 </div>
+              </a>
+
+              {/* Secondary CTA */}
+              <a
+                href={oneSheetProject.links.trial}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-4 border border-neutral-700 hover:border-neutral-500 text-gray-300 hover:text-white font-semibold rounded-full transition-all duration-300">
+                Start free trial
+                <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
           </motion.div>

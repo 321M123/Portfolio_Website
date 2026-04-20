@@ -59,18 +59,6 @@ export default function Home() {
       },
     },
     {
-      id: 2,
-      title: 'Portfolio Management & Stock Analysis App',
-      description:
-        'A smarter way to track your portfolio and analyze stocks – better insights than traditional platforms',
-      tags: ['TypeScript', 'Astro', 'APIs', 'JWT', 'OAuth', 'StripeJS'],
-      year: '2025',
-      image: '/compound.png',
-      links: {
-        github: ['#', '#'],
-      },
-    },
-    {
       id: 3,
       title: 'Voice and Chat App',
       description: 'Voice and chat app with random room matchmaking system (Omegle-like)',
