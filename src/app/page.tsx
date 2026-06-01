@@ -40,6 +40,9 @@ const techColors: { [key: string]: { bg: string; text: string } } = {
   Swift: { bg: 'bg-orange-800/90', text: 'text-orange-100' },
   iOS: { bg: 'bg-gray-800/90', text: 'text-gray-100' },
   Algorithms: { bg: 'bg-purple-800/90', text: 'text-purple-100' },
+  Finance: { bg: 'bg-emerald-900/90', text: 'text-emerald-100' },
+  Macro: { bg: 'bg-sky-900/90', text: 'text-sky-100' },
+  Markets: { bg: 'bg-indigo-900/90', text: 'text-indigo-100' },
 };
 
 export default function Home() {
@@ -104,6 +107,18 @@ export default function Home() {
       links: {
         github: ['#'],
         appstore: 'https://apps.apple.com/ca/app/shortmap/id6747984266',
+      },
+    },
+    {
+      id: 7,
+      title: 'Polymarket Macro Trading',
+      description:
+        'A hobby of mine, I have been on the platform for a while observing markets and how it has evolved, taking thesis-driven positions on macro, political and economic events that mirror the same convictions behind my stock portfolio.',
+      tags: ['Finance', 'Macro', 'Markets'],
+      year: '2024',
+      links: {
+        github: [],
+        polymarket: 'https://polymarket.com/profile/0x5874B7978187A776E3977b1541A0db4c28d1421D',
       },
     },
   ];
@@ -341,18 +356,21 @@ export default function Home() {
                             </div>
                           </div>
                         </>
+                      ) : project.image ? (
+                        <div className="w-full h-full relative">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            layout="fill"
+                            objectFit="cover"
+                            className="w-full h-full"
+                          />
+                        </div>
                       ) : (
-                        project.image && (
-                          <div className="w-full h-full relative">
-                            <Image
-                              src={project.image}
-                              alt={project.title}
-                              layout="fill"
-                              objectFit="cover"
-                              className="w-full h-full"
-                            />
-                          </div>
-                        )
+                        <div className="w-full h-full relative flex items-center justify-center bg-gradient-to-br from-[#1452F0] via-[#0b1f4d] to-[#141414]">
+                          <span className="text-white text-2xl font-bold tracking-tight">Polymarket</span>
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
+                        </div>
                       )}
                       <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
                         {project.year}
@@ -463,6 +481,23 @@ export default function Home() {
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                           </svg>
                           App Store
+                        </a>
+                      )}
+                      {project.links.polymarket && (
+                        <a
+                          href={project.links.polymarket}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center justify-center bg-[#1452F0] hover:bg-[#1146cc] text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="w-5 h-5 mr-2">
+                            <path d="M4 20V10h3v10H4zm6.5 0V4h3v16h-3zM17 20v-7h3v7h-3z" />
+                          </svg>
+                          View on Polymarket
                         </a>
                       )}
                     </div>
