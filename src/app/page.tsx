@@ -43,6 +43,7 @@ const techColors: { [key: string]: { bg: string; text: string } } = {
   Finance: { bg: 'bg-emerald-900/90', text: 'text-emerald-100' },
   Macro: { bg: 'bg-sky-900/90', text: 'text-sky-100' },
   Markets: { bg: 'bg-indigo-900/90', text: 'text-indigo-100' },
+  Crypto: { bg: 'bg-amber-900/90', text: 'text-amber-100' },
 };
 
 export default function Home() {
@@ -51,14 +52,15 @@ export default function Home() {
 
   const projects = [
     {
-      id: 1,
-      title: 'Productivity App for Developers',
-      description: 'Tailor made prompts for AI IDEs using a comprehensive onboarding process',
-      tags: ['TypeScript', 'Astro', 'AI', 'Authentication'],
-      year: '2025',
-      image: '/devibe.png',
+      id: 7,
+      title: 'Polymarket Macro Trading',
+      description:
+        'A hobby of mine, I have been on the platform for a while observing markets and how it has evolved, taking thesis-driven positions on macro, political and economic events that mirror the same convictions behind my stock portfolio.',
+      tags: ['Finance', 'Macro', 'Markets', 'Crypto'],
+      year: '2024',
       links: {
-        github: ['#', '#'],
+        github: [],
+        polymarket: 'https://polymarket.com/profile/0x5874B7978187A776E3977b1541A0db4c28d1421D',
       },
     },
     {
@@ -110,15 +112,14 @@ export default function Home() {
       },
     },
     {
-      id: 7,
-      title: 'Polymarket Macro Trading',
-      description:
-        'A hobby of mine, I have been on the platform for a while observing markets and how it has evolved, taking thesis-driven positions on macro, political and economic events that mirror the same convictions behind my stock portfolio.',
-      tags: ['Finance', 'Macro', 'Markets', 'Crypto'],
-      year: '2024',
+      id: 1,
+      title: 'Productivity App for Developers',
+      description: 'Tailor made prompts for AI IDEs using a comprehensive onboarding process',
+      tags: ['TypeScript', 'Astro', 'AI', 'Authentication'],
+      year: '2025',
+      image: '/devibe.png',
       links: {
-        github: [],
-        polymarket: 'https://polymarket.com/profile/0x5874B7978187A776E3977b1541A0db4c28d1421D',
+        github: ['#', '#'],
       },
     },
   ];
@@ -367,9 +368,14 @@ export default function Home() {
                           />
                         </div>
                       ) : (
-                        <div className="w-full h-full relative flex items-center justify-center bg-gradient-to-br from-[#1452F0] via-[#0b1f4d] to-[#141414]">
-                          <span className="text-white text-2xl font-bold tracking-tight">Polymarket</span>
-                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
+                        <div className="w-full h-full relative flex items-center justify-center bg-white">
+                          <Image
+                            src="/polymarket_logo.png"
+                            alt={project.title}
+                            width={220}
+                            height={48}
+                            className="w-[70%] h-auto object-contain"
+                          />
                         </div>
                       )}
                       <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
@@ -382,11 +388,11 @@ export default function Home() {
                         <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
                       </div>
                       <div className="mt-auto pt-2">
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1.5">
                           {project.tags.map((tag, index) => {
                             const colors = techColors[tag] || { bg: 'bg-gray-900/90', text: 'text-gray-100' };
                             return (
-                              <Badge key={index} variant="secondary" className={`${colors.bg} ${colors.text}`}>
+                              <Badge key={index} variant="secondary" className={`px-2 ${colors.bg} ${colors.text}`}>
                                 {tag}
                               </Badge>
                             );
@@ -489,15 +495,16 @@ export default function Home() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center justify-center bg-[#1452F0] hover:bg-[#1146cc] text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="w-5 h-5 mr-2">
-                            <path d="M4 20V10h3v10H4zm6.5 0V4h3v16h-3zM17 20v-7h3v7h-3z" />
-                          </svg>
-                          View on Polymarket
+                          className="inline-flex items-center justify-start bg-[#1452F0] hover:bg-[#1146cc] text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                          <Image
+                            src="/polymarket_icon.png"
+                            alt="Polymarket"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 mr-3"
+                            style={{ filter: 'invert(1)' }}
+                          />
+                          My Account
                         </a>
                       )}
                     </div>
