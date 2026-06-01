@@ -114,7 +114,7 @@ export default function Home() {
       title: 'Polymarket Macro Trading',
       description:
         'A hobby of mine, I have been on the platform for a while observing markets and how it has evolved, taking thesis-driven positions on macro, political and economic events that mirror the same convictions behind my stock portfolio.',
-      tags: ['Finance', 'Macro', 'Markets'],
+      tags: ['Finance', 'Macro', 'Markets', 'Crypto'],
       year: '2024',
       links: {
         github: [],
