@@ -12,7 +12,7 @@ const oneSheetProject = {
     tail: 'Stop switching between spreadsheets and brokerage apps.',
   },
   description:
-    'OneSheet combines institutional-grade fundamental research with automated portfolio tracking, giving quality investors an all-in-one terminal for everything.',
+    'Onesheet combines institutional-grade fundamental research with automated portfolio tracking, giving our users an all-in-one terminal for investing.',
   tech: ['TypeScript', 'React', 'Next.js', 'APIs & Scraping', 'VISX', 'Authentication', 'Payments'],
   stats: [
     { value: '25+', label: 'Broker Integrations' },
@@ -188,25 +188,13 @@ export function FeaturedProjectsSection() {
                 {oneSheetProject.leadLine.tail}
               </p>
               <div className="border-t border-neutral-800 pt-4">
-                <p>{oneSheetProject.description}</p>
+                <p>
+                  Onesheet combines institutional-grade fundamental research with automated portfolio tracking, giving
+                  our users an <span className="text-white font-semibold">all-in-one terminal for investing.</span>
+                </p>
               </div>
             </div>
           </div>
-
-          {/* Stats Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-neutral-800 rounded-2xl overflow-hidden max-w-3xl mx-auto border border-neutral-800">
-            {oneSheetProject.stats.map((stat, i) => (
-              <div key={i} className="bg-neutral-900/80 px-6 py-5 text-center">
-                <p className="text-3xl font-bold text-white tracking-tight">{stat.value}</p>
-                <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
 
           {/* Carousel */}
           <div

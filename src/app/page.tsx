@@ -177,19 +177,51 @@ export default function Home() {
                   <h3 className="text-white text-2xl font-bold">Education</h3>
                 </AnimatedBorder>
               </div>
-              <div className="relative w-full">
+              <div className="relative w-full flex flex-col gap-4">
+                {/* Main horizontal line from label to branch point */}
                 <motion.div
-                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  className="hidden md:block absolute h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  style={{ top: '50%', left: '-2rem', width: '1rem', transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }}
                   animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                  style={{ transformOrigin: 'left' }}
+                  transition={{ duration: 0.35, delay: 0.7 }}
+                />
+                {/* Vertical stem connecting the two branches */}
+                <motion.div
+                  className="hidden md:block absolute w-0.5 bg-blue-500"
+                  style={{ left: '-1rem', top: '22%', height: '56%', transformOrigin: 'top' }}
+                  initial={{ scaleY: 0 }}
+                  animate={educationInView ? { scaleY: 1 } : { scaleY: 0 }}
+                  transition={{ duration: 0.35, delay: 1.05 }}
+                />
+                {/* Branch stub to Bois-de-Boulogne */}
+                <motion.div
+                  className="hidden md:block absolute h-0.5 bg-blue-500"
+                  style={{ left: '-1rem', top: '22%', width: '1rem', transformOrigin: 'left' }}
+                  initial={{ scaleX: 0 }}
+                  animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 0.3, delay: 1.4 }}
+                />
+                {/* Branch stub to Concordia */}
+                <motion.div
+                  className="hidden md:block absolute h-0.5 bg-blue-500"
+                  style={{ left: '-1rem', top: '78%', width: '1rem', transformOrigin: 'left' }}
+                  initial={{ scaleX: 0 }}
+                  animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 0.3, delay: 1.4 }}
                 />
                 <AnimatedBorder delay={0.8}>
                   <p className="text-gray-200">
                     <span className="font-bold">Bois-de-Boulogne</span>
                     <br />
-                    Science, Computer Science and Mathematics (In progress)
+                    Science, Computer Science and Mathematics (Completed)
+                  </p>
+                </AnimatedBorder>
+                <AnimatedBorder delay={1.0}>
+                  <p className="text-gray-200">
+                    <span className="font-bold">Concordia University</span>
+                    <br />
+                    Admitted (Fall 2026 – 2030)
                   </p>
                 </AnimatedBorder>
               </div>
