@@ -47,17 +47,11 @@ export default function PrivacyPolicy() {
           <FadeInOnScroll delay={0}>
             <div className="bg-neutral-900/80 border border-blue-500/20 rounded-lg p-6">
               <div className="flex items-center gap-4 mb-4">
-                <h2 className="text-2xl font-semibold text-white">Esoteric Vocabulary</h2>
-                <Image
-                  src="/esotericVocabularyLogo.png"
-                  alt="Esoteric Vocabulary"
-                  width={56}
-                  height={56}
-                  className="rounded-xl"
-                />
+                <h2 className="text-2xl font-semibold text-white">Vocabites</h2>
+                <Image src="/vocabitesLogo.png" alt="Vocabites" width={56} height={56} className="rounded-xl" />
               </div>
               <p className="text-gray-300 leading-relaxed">
-                Esoteric Vocabulary does not require account creation of any kind. As a result,{' '}
+                Vocabites does not require account creation of any kind. As a result,{' '}
                 <span className="text-white font-medium">absolutely no data is collected, stored, or transmitted</span>{' '}
                 when using this app.
               </p>
