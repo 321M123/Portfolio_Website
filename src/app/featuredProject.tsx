@@ -188,7 +188,7 @@ export function FeaturedProjectsSection() {
                 {oneSheetProject.leadLine.tail}
               </p>
               <div className="border-t border-neutral-800 pt-4">
-                <p>
+                <p className="text-balance">
                   Onesheet combines institutional-grade fundamental research with automated portfolio tracking, giving
                   our users an <span className="text-white font-semibold">all-in-one terminal for investing.</span>
                 </p>
@@ -224,7 +224,7 @@ export function FeaturedProjectsSection() {
                     transition={{ duration: 0.5 }}
                     className="absolute inset-0 flex items-center justify-center"
                     style={{ transform: 'translateZ(50px)' }}>
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full h-full flex items-center justify-center px-12 sm:px-16 md:px-8 py-6">
                       <motion.img
                         src={oneSheetProject.images[currentSlide].image}
                         alt={oneSheetProject.images[currentSlide].label}
@@ -240,9 +240,7 @@ export function FeaturedProjectsSection() {
               </div>
 
               {/* Slide caption */}
-              <div
-                className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
-                style={{ transform: 'translateZ(60px) translateX(-50%)' }}>
+              <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 pointer-events-none w-max max-w-[85%] text-center">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={currentSlide}
@@ -250,7 +248,7 @@ export function FeaturedProjectsSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs text-white/50 tracking-wider uppercase bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+                    className="inline-block max-w-full truncate whitespace-nowrap text-[10px] sm:text-xs text-white/50 tracking-wider uppercase bg-black/40 px-2.5 sm:px-3 py-1 rounded-full backdrop-blur-sm">
                     {oneSheetProject.images[currentSlide].label}
                   </motion.span>
                 </AnimatePresence>
@@ -275,9 +273,9 @@ export function FeaturedProjectsSection() {
                 e.stopPropagation();
                 handleMouseLeave();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
               aria-label="Previous slide">
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={goToNext}
@@ -286,9 +284,9 @@ export function FeaturedProjectsSection() {
                 e.stopPropagation();
                 handleMouseLeave();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
               aria-label="Next slide">
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             {/* Dots */}
