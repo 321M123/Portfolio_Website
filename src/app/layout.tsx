@@ -1,13 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
+import Navigation from '@/components/Navigation';
 import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '600', '700'],
   display: 'swap',
   variable: '--font-inter',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-jetbrains',
 });
 
 export const metadata: Metadata = {
@@ -49,7 +57,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sf-pro bg-black`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-field text-ink`}>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EP3Y8B1S85" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -59,7 +67,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-EP3Y8B1S85');
           `}
         </Script>
-        {children}
+        <Navigation />
+        <div className="pt-14">{children}</div>
       </body>
     </html>
   );

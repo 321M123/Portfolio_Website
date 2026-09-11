@@ -7,14 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sf-pro': [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'SF Pro Display',
-          'SF Pro Text',
-          'Helvetica Neue',
-          'sans-serif',
-        ],
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', 'ui-monospace', 'monospace'],
       },
     },
   },

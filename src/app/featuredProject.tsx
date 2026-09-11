@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import Shuffle from '@/components/ui/shadcn-io/shuffle';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const oneSheetProject = {
   title: 'OneSheet',
@@ -54,7 +56,6 @@ export function FeaturedProjectsSection() {
 
   const totalSlides = oneSheetProject.images.length;
 
-  // 3D Hover Card Effects
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -89,7 +90,6 @@ export function FeaturedProjectsSection() {
     setShinePosition({ x: 50, y: 50 });
   };
 
-  // Auto-play
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
@@ -103,7 +103,6 @@ export function FeaturedProjectsSection() {
   const goToNext = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const goToSlide = (index: number) => setCurrentSlide(index);
 
-  // Slot machine effect on CTA hover
   useEffect(() => {
     if (!isHovering) {
       setDisplayText(originalText);
@@ -144,7 +143,7 @@ export function FeaturedProjectsSection() {
   }, [isHovering, originalText]);
 
   return (
-    <section id="onesheet" className="py-24 relative bg-black">
+    <section id="onesheet" className="scroll-mt-14 py-24 relative">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -152,14 +151,13 @@ export function FeaturedProjectsSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="space-y-16">
-          {/* Header */}
           <div className="text-center space-y-4">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="text-blue-500 text-sm font-semibold tracking-widest uppercase">
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               Featured Project
             </motion.p>
             <Shuffle
@@ -174,29 +172,28 @@ export function FeaturedProjectsSection() {
               triggerOnce={false}
               triggerOnHover={true}
               respectReducedMotion={true}
-              className="text-foreground"
+              className="text-ink"
               style={{
                 fontSize: 'clamp(2.5rem, 9vw, 5rem)',
                 fontFamily: 'inherit',
                 display: 'block',
               }}
             />
-            <div className="text-gray-400 text-lg md:text-xl max-w-5xl mx-auto leading-relaxed space-y-4">
+            <div className="text-muted text-lg md:text-xl max-w-5xl mx-auto leading-relaxed space-y-4">
               <p className="text-base sm:text-lg md:text-xl md:whitespace-nowrap">
-                <span className="text-white font-medium">{oneSheetProject.leadLine.emphasis}</span>
-                <span className="text-gray-500"> — </span>
+                <span className="text-ink font-medium">{oneSheetProject.leadLine.emphasis}</span>
+                <span className="text-muted"> — </span>
                 {oneSheetProject.leadLine.tail}
               </p>
-              <div className="border-t border-neutral-800 pt-4">
+              <div className="border-t border-rule pt-4">
                 <p>
                   Onesheet combines institutional-grade fundamental research with automated portfolio tracking, giving
-                  our users an <span className="text-white font-semibold">all-in-one terminal for investing.</span>
+                  our users an <span className="text-ink font-semibold">all-in-one terminal for investing.</span>
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Carousel */}
           <div
             ref={cardRef}
             className="relative max-w-5xl mx-auto"
@@ -214,7 +211,7 @@ export function FeaturedProjectsSection() {
                 transformStyle: 'preserve-3d',
               }}
               className="relative h-[400px] md:h-[500px] lg:h-[600px]">
-              <div className="relative w-full h-full overflow-hidden rounded-3xl flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
+              <div className="relative w-full h-full overflow-hidden rounded-sm flex items-center justify-center bg-field border border-rule">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -228,10 +225,10 @@ export function FeaturedProjectsSection() {
                       <motion.img
                         src={oneSheetProject.images[currentSlide].image}
                         alt={oneSheetProject.images[currentSlide].label}
-                        className="max-w-full max-h-full object-contain object-center rounded-3xl"
+                        className="max-w-full max-h-full object-contain object-center rounded-sm"
                         style={{
                           transform: 'translateZ(100px)',
-                          filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))',
+                          filter: 'drop-shadow(0 12px 24px rgba(17, 17, 17, 0.12))',
                         }}
                       />
                     </div>
@@ -239,7 +236,6 @@ export function FeaturedProjectsSection() {
                 </AnimatePresence>
               </div>
 
-              {/* Slide caption */}
               <div
                 className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
                 style={{ transform: 'translateZ(60px) translateX(-50%)' }}>
@@ -250,24 +246,22 @@ export function FeaturedProjectsSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs text-white/50 tracking-wider uppercase bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+                    className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted bg-field border border-rule px-3 py-1">
                     {oneSheetProject.images[currentSlide].label}
                   </motion.span>
                 </AnimatePresence>
               </div>
 
-              {/* Shine */}
               <motion.div
-                className="absolute inset-0 rounded-3xl pointer-events-none overflow-hidden"
+                className="absolute inset-0 rounded-sm pointer-events-none overflow-hidden"
                 style={{
                   transform: 'translateZ(1px)',
-                  background: `radial-gradient(600px circle at ${shinePosition.x}% ${shinePosition.y}%, rgba(255, 255, 255, 0.15), transparent 40%)`,
+                  background: `radial-gradient(600px circle at ${shinePosition.x}% ${shinePosition.y}%, rgba(58, 90, 122, 0.1), transparent 40%)`,
                   transition: 'background 0.1s ease-out',
                 }}
               />
             </motion.div>
 
-            {/* Navigation Arrows */}
             <button
               onClick={goToPrevious}
               onMouseEnter={handleMouseLeave}
@@ -275,7 +269,7 @@ export function FeaturedProjectsSection() {
                 e.stopPropagation();
                 handleMouseLeave();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-field text-ink border border-rule hover:border-accent hover:text-accent p-3 transition-colors"
               aria-label="Previous slide">
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -286,12 +280,11 @@ export function FeaturedProjectsSection() {
                 e.stopPropagation();
                 handleMouseLeave();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-field text-ink border border-rule hover:border-accent hover:text-accent p-3 transition-colors"
               aria-label="Next slide">
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Dots */}
             <div
               className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3"
               onMouseEnter={handleMouseLeave}
@@ -303,8 +296,8 @@ export function FeaturedProjectsSection() {
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/60 w-3'
+                  className={`h-1.5 transition-all duration-300 ${
+                    index === currentSlide ? 'bg-ink w-8' : 'bg-rule hover:bg-accent w-3'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -312,46 +305,48 @@ export function FeaturedProjectsSection() {
             </div>
           </div>
 
-          {/* Tech + CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center space-y-8">
-            {/* Tech pills */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {oneSheetProject.stats.map((stat) => (
+                <div key={stat.label} className="min-w-[120px]">
+                  <div className="text-2xl font-bold tracking-tight text-accent">{stat.value}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
             <div className="flex flex-wrap justify-center gap-2">
-              {oneSheetProject.tech.map((tech, index) => (
+              {oneSheetProject.tech.map((tech) => (
                 <span
-                  key={index}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm text-gray-300 transition-colors">
+                  key={tech}
+                  className="px-3 py-1.5 bg-field border border-rule font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
                   {tech}
                 </span>
               ))}
             </div>
 
-            {/* CTA cluster */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-              {/* Primary CTA with slot machine */}
               <a
                 href={oneSheetProject.links.primary}
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className="flex items-center gap-3 px-6 py-4 bg-[#242828] hover:bg-[#2d3232] text-white font-semibold rounded-full transition-all duration-300 group">
-                <span className="font-mono tracking-wider min-w-[170px] text-center">{displayText}</span>
-                <div className="bg-[#343A3A] group-hover:bg-[#3d4444] p-2 rounded-lg transition-colors duration-300">
-                  <ArrowUpRight className="w-5 h-5" />
-                </div>
+                className={cn(buttonVariants({ variant: 'primary' }), 'gap-3')}>
+                <span className="min-w-[170px] text-center">{displayText}</span>
+                <ArrowUpRight className="w-4 h-4" />
               </a>
 
-              {/* Secondary CTA */}
               <a
                 href={oneSheetProject.links.trial}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-4 border border-neutral-700 hover:border-neutral-500 text-gray-300 hover:text-white font-semibold rounded-full transition-all duration-300">
+                className={buttonVariants({ variant: 'outline' })}>
                 Start free trial
                 <ArrowUpRight className="w-4 h-4" />
               </a>

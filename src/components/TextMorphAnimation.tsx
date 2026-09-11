@@ -72,7 +72,7 @@ const TextMorphAnimation: React.FC = () => {
       const canvasHeight = currentCanvas.height / dpr;
 
       const fontSize = Math.min(canvasWidth / 8, 100);
-      currentCtx.font = `bold ${fontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+      currentCtx.font = `700 ${fontSize}px Inter, ui-sans-serif, system-ui, sans-serif`;
       currentCtx.textAlign = 'center';
       currentCtx.textBaseline = 'middle';
 
@@ -82,11 +82,8 @@ const TextMorphAnimation: React.FC = () => {
 
       const gradient = currentCtx.createLinearGradient(textX - textWidth / 2, 0, textX + textWidth / 2, 0);
 
-      gradient.addColorStop(0, '#43abf4');
-      gradient.addColorStop(0.25, '#8a64ec');
-      gradient.addColorStop(0.5, '#e54db1');
-      gradient.addColorStop(0.75, '#f56f68');
-      gradient.addColorStop(1, '#fc8d3c');
+      gradient.addColorStop(0, '#111111');
+      gradient.addColorStop(1, '#3A5A7A');
 
       currentCtx.fillStyle = gradient;
       currentCtx.fillText(text, textX, canvasHeight / 2);

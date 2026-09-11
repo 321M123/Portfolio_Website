@@ -26,7 +26,7 @@ export function AnimatedBorder({ children, className, delay = 0, duration = 1 }:
   };
 
   return (
-    <div ref={ref} className={cn('relative bg-neutral-900/80 rounded-lg', className)}>
+    <div ref={ref} className={cn('relative bg-field rounded-sm', className)}>
       <motion.div
         className="p-4"
         variants={contentVariants}
@@ -47,9 +47,9 @@ export function AnimatedBorder({ children, className, delay = 0, duration = 1 }:
           y="1"
           width="calc(100% - 2px)"
           height="calc(100% - 2px)"
-          rx="7" // rounded-lg is 8px, so 8-1=7 for the inner radius
-          stroke="rgba(59, 130, 246, 1)" // blue-500
-          strokeWidth="2"
+          rx="2"
+          stroke="var(--accent)"
+          strokeWidth="1.5"
           variants={borderVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}

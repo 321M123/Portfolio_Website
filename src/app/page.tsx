@@ -7,44 +7,13 @@ import { motion, useInView } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { TechBadge } from '@/components/ui/tech-badge';
 import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
 import { FileCode, FileType2, Atom, Rocket, Layout, Code2, Coffee, Shield } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { AnimatedBorder } from '@/components/ui/AnimatedBorder';
 import { FeaturedProjectsSection } from './featuredProject';
 import Image from 'next/image';
-
-// Technology color mapping
-const techColors: { [key: string]: { bg: string; text: string } } = {
-  TypeScript: { bg: 'bg-blue-900/90', text: 'text-blue-100' },
-  JavaScript: { bg: 'bg-yellow-900/90', text: 'text-yellow-100' },
-  React: { bg: 'bg-cyan-900/90', text: 'text-cyan-100' },
-  Astro: { bg: 'bg-purple-900/90', text: 'text-purple-100' },
-  'HTML/CSS': { bg: 'bg-orange-900/90', text: 'text-orange-100' },
-  Tailwind: { bg: 'bg-teal-900/90', text: 'text-teal-100' },
-  'C++': { bg: 'bg-blue-800/90', text: 'text-blue-100' },
-  Java: { bg: 'bg-red-900/90', text: 'text-red-100' },
-  Python: { bg: 'bg-green-900/90', text: 'text-green-100' },
-  Solidity: { bg: 'bg-gray-900/90', text: 'text-gray-100' },
-  AI: { bg: 'bg-indigo-900/90', text: 'text-indigo-100' },
-  Authentication: { bg: 'bg-pink-900/90', text: 'text-pink-100' },
-  APIs: { bg: 'bg-rose-900/90', text: 'text-rose-100' },
-  JWT: { bg: 'bg-violet-900/90', text: 'text-violet-100' },
-  OAuth: { bg: 'bg-fuchsia-900/90', text: 'text-fuchsia-100' },
-  StripeJS: { bg: 'bg-sky-900/90', text: 'text-sky-100' },
-  MERN: { bg: 'bg-emerald-900/90', text: 'text-emerald-100' },
-  WebRTC: { bg: 'bg-amber-900/90', text: 'text-amber-100' },
-  WebSockets: { bg: 'bg-lime-900/90', text: 'text-lime-100' },
-  DEX: { bg: 'bg-blue-950/90', text: 'text-blue-100' },
-  Web3: { bg: 'bg-indigo-950/90', text: 'text-indigo-100' },
-  Swift: { bg: 'bg-orange-800/90', text: 'text-orange-100' },
-  iOS: { bg: 'bg-gray-800/90', text: 'text-gray-100' },
-  Algorithms: { bg: 'bg-purple-800/90', text: 'text-purple-100' },
-  Finance: { bg: 'bg-emerald-900/90', text: 'text-emerald-100' },
-  Macro: { bg: 'bg-sky-900/90', text: 'text-sky-100' },
-  Markets: { bg: 'bg-indigo-900/90', text: 'text-indigo-100' },
-  Crypto: { bg: 'bg-amber-900/90', text: 'text-amber-100' },
-};
 
 export default function Home() {
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
@@ -132,33 +101,29 @@ export default function Home() {
   const languagesInView = useInView(languagesRef, { once: true, amount: 0.3 });
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative flex h-screen items-center justify-center overflow-hidden bg-black">
+      <section className="relative flex min-h-[calc(100svh-3.5rem)] items-center justify-center overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="h-[300px] md:h-[400px] mb-8">
               <TextMorphAnimation />
             </div>
-            <p className="text-2xl text-blue-700 dark:text-blue-300 mb-8 font-medium">Fintech Developer</p>
-            <div className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
-              <Link href="https://github.com/321M123" className="flex items-center gap-2">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent mb-8">Fintech Developer</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="https://github.com/321M123" className={buttonVariants({ variant: 'primary' })}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-5 h-5">
+                  className="w-4 h-4">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
-                <span>GitHub</span>
+                GitHub
               </Link>
-              <span className="text-blue-300">|</span>
-              <a
-                href="mailto:mk@mikaelkortbaoui.dev"
-                className="underline hover:text-blue-200 transition"
-                style={{ textDecoration: 'none' }}>
+              <a href="mailto:mk@mikaelkortbaoui.dev" className={buttonVariants({ variant: 'outline' })}>
                 mk@mikaelkortbaoui.dev
               </a>
             </div>
@@ -167,59 +132,55 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 relative bg-black">
+      <section id="about" className="scroll-mt-14 py-20 relative">
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <div className="space-y-16">
             {/* Education */}
             <div ref={educationRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <div className="w-full md:w-auto md:min-w-[180px] text-center">
                 <AnimatedBorder>
-                  <h3 className="text-white text-2xl font-bold">Education</h3>
+                  <h3 className="text-ink text-2xl font-bold tracking-tight">Education</h3>
                 </AnimatedBorder>
               </div>
               <div className="relative w-full flex flex-col gap-4">
-                {/* Main horizontal line from label to branch point */}
                 <motion.div
-                  className="hidden md:block absolute h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  className="hidden md:block absolute h-px bg-accent transform -translate-y-1/2"
                   style={{ top: '50%', left: '-2rem', width: '1rem', transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }}
                   animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.35, delay: 0.7 }}
                 />
-                {/* Vertical stem connecting the two branches */}
                 <motion.div
-                  className="hidden md:block absolute w-0.5 bg-blue-500"
+                  className="hidden md:block absolute w-px bg-accent"
                   style={{ left: '-1rem', top: '22%', height: '56%', transformOrigin: 'top' }}
                   initial={{ scaleY: 0 }}
                   animate={educationInView ? { scaleY: 1 } : { scaleY: 0 }}
                   transition={{ duration: 0.35, delay: 1.05 }}
                 />
-                {/* Branch stub to Bois-de-Boulogne */}
                 <motion.div
-                  className="hidden md:block absolute h-0.5 bg-blue-500"
+                  className="hidden md:block absolute h-px bg-accent"
                   style={{ left: '-1rem', top: '22%', width: '1rem', transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }}
                   animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.3, delay: 1.4 }}
                 />
-                {/* Branch stub to Concordia */}
                 <motion.div
-                  className="hidden md:block absolute h-0.5 bg-blue-500"
+                  className="hidden md:block absolute h-px bg-accent"
                   style={{ left: '-1rem', top: '78%', width: '1rem', transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }}
                   animate={educationInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.3, delay: 1.4 }}
                 />
                 <AnimatedBorder delay={0.8}>
-                  <p className="text-gray-200">
-                    <span className="font-bold">Bois-de-Boulogne</span>
+                  <p className="text-muted">
+                    <span className="font-bold text-ink">Bois-de-Boulogne</span>
                     <br />
                     Science, Computer Science and Mathematics (Completed)
                   </p>
                 </AnimatedBorder>
                 <AnimatedBorder delay={1.0}>
-                  <p className="text-gray-200">
-                    <span className="font-bold">Concordia University</span>
+                  <p className="text-muted">
+                    <span className="font-bold text-ink">Concordia University</span>
                     <br />
                     Admitted (Fall 2026 – 2030)
                   </p>
@@ -230,12 +191,12 @@ export default function Home() {
             <div ref={hobbiesRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <div className="w-full md:w-auto md:min-w-[180px] text-center">
                 <AnimatedBorder>
-                  <h3 className="text-white text-2xl font-bold">Interests</h3>
+                  <h3 className="text-ink text-2xl font-bold tracking-tight">Interests</h3>
                 </AnimatedBorder>
               </div>
               <div className="relative w-full">
                 <motion.div
-                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-px bg-accent transform -translate-y-1/2"
                   initial={{ scaleX: 0 }}
                   animate={hobbiesInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 }}
@@ -243,12 +204,12 @@ export default function Home() {
                 />
                 <AnimatedBorder delay={0.8}>
                   <div className="flex">
-                    <ul className="w-1/2 list-disc list-inside text-gray-300 space-y-2">
+                    <ul className="w-1/2 list-disc list-inside text-muted space-y-2">
                       <li>Programming & Robotics</li>
                       <li>Finance</li>
                       <li>Reading</li>
                     </ul>
-                    <ul className="w-1/2 list-disc list-inside text-gray-300 space-y-2">
+                    <ul className="w-1/2 list-disc list-inside text-muted space-y-2">
                       <li>Swimming</li>
                       <li>Running</li>
                       <li>Gym</li>
@@ -261,19 +222,19 @@ export default function Home() {
             <div ref={languagesRef} className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <div className="w-full md:w-auto md:min-w-[180px] text-center">
                 <AnimatedBorder>
-                  <h3 className="text-white text-2xl font-bold">Languages</h3>
+                  <h3 className="text-ink text-2xl font-bold tracking-tight">Languages</h3>
                 </AnimatedBorder>
               </div>
               <div className="relative w-full">
                 <motion.div
-                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-0.5 bg-blue-500 transform -translate-y-1/2"
+                  className="hidden md:block absolute top-1/2 -left-8 w-8 h-px bg-accent transform -translate-y-1/2"
                   style={{ transformOrigin: 'left' }}
                   initial={{ scaleX: 0 }}
                   animate={languagesInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 }}
                 />
                 <AnimatedBorder delay={0.8}>
-                  <ul className="list-disc list-inside text-gray-300 space-y-1">
+                  <ul className="list-disc list-inside text-muted space-y-1">
                     <li>French (Read, written, spoken)</li>
                     <li>English (Read, written, spoken)</li>
                     <li>Spanish (Read, written, spoken)</li>
@@ -282,40 +243,35 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Programming Languages Card (unchanged) */}
-          <Card className="bg-neutral-900/80 border-neutral-800 backdrop-blur-md py-6 px-4 md:px-8 mt-32 mb-12 md:col-span-2">
+          <Card className="py-6 px-4 md:px-8 mt-32 mb-12 md:col-span-2">
             <CardHeader>
-              <CardTitle className="text-white text-2xl font-bold">Programming Languages</CardTitle>
+              <CardTitle className="text-ink text-2xl font-bold tracking-tight">Programming Languages</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-5 mt-4">
                 <TechBadge
-                  icon={<FileCode className="text-yellow-400" />}
+                  icon={<FileCode className="text-accent" />}
                   name="JavaScript (JS)"
                   description="Web scraping & APIs"
                 />
                 <TechBadge
-                  icon={<FileType2 className="text-blue-400" />}
+                  icon={<FileType2 className="text-accent" />}
                   name="TypeScript (TS)"
                   description="Frontend/Backend dev & APIs (New projects)"
                 />
-                <TechBadge icon={<Atom className="text-cyan-400" />} name="React" description="Web apps" />
+                <TechBadge icon={<Atom className="text-accent" />} name="React" description="Web apps" />
+                <TechBadge icon={<Rocket className="text-accent" />} name="Astro" description="Web apps (New projects)" />
                 <TechBadge
-                  icon={<Rocket className="text-orange-400" />}
-                  name="Astro"
-                  description="Web apps (New projects)"
-                />
-                <TechBadge
-                  icon={<Layout className="text-orange-400" />}
+                  icon={<Layout className="text-accent" />}
                   name="HTML/CSS & Tailwind"
                   description="Web layout & styling"
                 />
                 <TechBadge
-                  icon={<Code2 className="text-blue-500" />}
+                  icon={<Code2 className="text-accent" />}
                   name="C++"
                   description="Low level coding & Robotics"
                 />
-                <TechBadge icon={<Coffee className="text-red-400" />} name="Java" description="Academic projects" />
+                <TechBadge icon={<Coffee className="text-accent" />} name="Java" description="Academic projects" />
                 <TechBadge
                   icon={
                     <span role="img" aria-label="Python">
@@ -325,25 +281,23 @@ export default function Home() {
                   name="Python"
                   description="Data science & Ai"
                 />
-                <TechBadge icon={<Shield className="text-gray-400" />} name="Solidity" description="ETH dev" />
+                <TechBadge icon={<Shield className="text-accent" />} name="Solidity" description="ETH dev" />
               </div>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
       <FeaturedProjectsSection />
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 relative bg-black">
+      <section id="projects" className="scroll-mt-14 py-20 relative">
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-3xl font-bold text-center text-white mb-12">Other Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-center text-ink mb-12">Other Projects</h2>
           <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="w-full max-w-xs h-[440px] rounded-lg cursor-pointer group"
+                className="w-full max-w-xs h-[440px] rounded-sm cursor-pointer group"
                 style={{ perspective: 1000 }}
                 onClick={() => setFlippedCardId(flippedCardId === project.id ? null : project.id)}>
                 <motion.div
@@ -352,43 +306,40 @@ export default function Home() {
                   initial={false}
                   animate={{ rotateY: flippedCardId === project.id ? 180 : 0 }}
                   transition={{ duration: 0.6 }}>
-                  {/* FRONT */}
                   <div
-                    className="absolute w-full h-full bg-[#141414] border border-[#222222] rounded-lg shadow-lg overflow-hidden flex flex-col"
+                    className="absolute w-full h-full bg-field border border-rule rounded-sm overflow-hidden flex flex-col"
                     style={{ backfaceVisibility: 'hidden' }}>
-                    <div className="h-48 bg-[#141414] relative shrink-0">
+                    <div className="h-48 bg-field relative shrink-0">
                       {project.images && project.images.length > 5 ? (
-                        <>
-                          <div className="w-full h-full flex">
-                            <div className="w-1/2 h-full relative">
-                              <Image
-                                src={project.images[0]}
-                                alt={`${project.title} - Image 1`}
-                                layout="fill"
-                                objectFit="cover"
-                                className="w-full h-full"
-                              />
-                            </div>
-                            <div className="w-1/2 h-full relative">
-                              <Image
-                                src={project.images[1]}
-                                alt={`${project.title} - Image 2`}
-                                layout="fill"
-                                objectFit="cover"
-                                className="w-full h-full"
-                              />
-                            </div>
-                            <div className="w-1/2 h-full relative">
-                              <Image
-                                src={project.images[2]}
-                                alt={`${project.title} - Image 3`}
-                                layout="fill"
-                                objectFit="cover"
-                                className="w-full h-full"
-                              />
-                            </div>
+                        <div className="w-full h-full flex">
+                          <div className="w-1/2 h-full relative">
+                            <Image
+                              src={project.images[0]}
+                              alt={`${project.title} - Image 1`}
+                              layout="fill"
+                              objectFit="cover"
+                              className="w-full h-full"
+                            />
                           </div>
-                        </>
+                          <div className="w-1/2 h-full relative">
+                            <Image
+                              src={project.images[1]}
+                              alt={`${project.title} - Image 2`}
+                              layout="fill"
+                              objectFit="cover"
+                              className="w-full h-full"
+                            />
+                          </div>
+                          <div className="w-1/2 h-full relative">
+                            <Image
+                              src={project.images[2]}
+                              alt={`${project.title} - Image 3`}
+                              layout="fill"
+                              objectFit="cover"
+                              className="w-full h-full"
+                            />
+                          </div>
+                        </div>
                       ) : project.image ? (
                         <div className="w-full h-full relative">
                           <Image
@@ -400,7 +351,7 @@ export default function Home() {
                           />
                         </div>
                       ) : (
-                        <div className="w-full h-full relative flex items-center justify-center bg-white">
+                        <div className="w-full h-full relative flex items-center justify-center bg-field border-b border-rule">
                           <Image
                             src="/polymarket_logo.png"
                             alt={project.title}
@@ -410,35 +361,31 @@ export default function Home() {
                           />
                         </div>
                       )}
-                      <span className="absolute top-3 left-3 bg-neutral-900/70 text-gray-200 text-xs font-semibold px-2.5 py-1.5 rounded-lg">
+                      <span className="absolute top-3 left-3 bg-field border border-rule text-muted font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1">
                         {project.year}
                       </span>
                     </div>
                     <div className="p-6 flex flex-col flex-grow">
                       <div>
-                        <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                        <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
+                        <h3 className="text-xl font-semibold tracking-tight text-ink mb-2">{project.title}</h3>
+                        <p className="text-muted mb-4 text-sm">{project.description}</p>
                       </div>
                       <div className="mt-auto pt-2">
                         <div className="flex flex-wrap gap-1.5">
-                          {project.tags.map((tag, index) => {
-                            const colors = techColors[tag] || { bg: 'bg-gray-900/90', text: 'text-gray-100' };
-                            return (
-                              <Badge key={index} variant="secondary" className={`px-2 ${colors.bg} ${colors.text}`}>
-                                {tag}
-                              </Badge>
-                            );
-                          })}
+                          {project.tags.map((tag, index) => (
+                            <Badge key={index} variant="secondary" className="px-2">
+                              {tag}
+                            </Badge>
+                          ))}
                         </div>
                       </div>
                     </div>
                   </div>
-                  {/* BACK */}
                   <div
-                    className="absolute w-full h-full bg-[#141414] border border-[#222222] rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-center justify-center text-center"
+                    className="absolute w-full h-full bg-field border border-rule rounded-sm overflow-hidden p-6 flex flex-col items-center justify-center text-center"
                     style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-                    <h3 className="text-xl font-semibold text-white mb-4">{project.title}</h3>
-                    <div className="flex flex-col gap-4 w-full max-w-[200px]">
+                    <h3 className="text-xl font-semibold tracking-tight text-ink mb-4">{project.title}</h3>
+                    <div className="flex flex-col gap-3 w-full max-w-[200px]">
                       {project.links.github.map((link, index) => {
                         const buttonId = `${project.id}-${index}`;
                         const isPrivate = link === '#';
@@ -447,9 +394,10 @@ export default function Home() {
                           return (
                             <Badge
                               key={buttonId}
-                              className="inline-flex items-center justify-center bg-yellow-900/90 text-yellow-100 font-semibold py-3 px-2 rounded-lg w-full text-center text-xs"
+                              variant="outline"
+                              className="inline-flex items-center justify-center py-3 px-2 w-full text-center normal-case tracking-normal"
                               onClick={(e) => e.stopPropagation()}>
-                              <FontAwesomeIcon icon={faLock} className="w-5 h-5 mr-1.5 shrink-0" />
+                              <FontAwesomeIcon icon={faLock} className="w-4 h-4 mr-1.5 shrink-0" />
                               <span>Sorry, this repository is still private</span>
                             </Badge>
                           );
@@ -458,7 +406,7 @@ export default function Home() {
                         const buttonContent = (
                           <>
                             {isPrivate ? (
-                              <FontAwesomeIcon icon={faLock} className="w-5 h-5 mr-2" />
+                              <FontAwesomeIcon icon={faLock} className="w-4 h-4" />
                             ) : (
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -466,7 +414,7 @@ export default function Home() {
                                 height="24"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
-                                className="w-5 h-5 mr-2">
+                                className="w-4 h-4">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                               </svg>
                             )}
@@ -484,23 +432,23 @@ export default function Home() {
                                 setPrivateLinkMessageId(buttonId);
                                 setTimeout(() => setPrivateLinkMessageId(null), 2000);
                               }}
-                              className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                              className={buttonVariants({ variant: 'primary', size: 'full' })}>
                               {buttonContent}
                             </button>
                           );
-                        } else {
-                          return (
-                            <a
-                              key={buttonId}
-                              href={link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
-                              {buttonContent}
-                            </a>
-                          );
                         }
+
+                        return (
+                          <a
+                            key={buttonId}
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className={buttonVariants({ variant: 'primary', size: 'full' })}>
+                            {buttonContent}
+                          </a>
+                        );
                       })}
                       {project.links.appstore && (
                         <a
@@ -508,14 +456,14 @@ export default function Home() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center justify-center bg-black hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                          className={buttonVariants({ variant: 'primary', size: 'full' })}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
                             height="24"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="w-5 h-5 mr-2">
+                            className="w-4 h-4">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                           </svg>
                           App Store
@@ -527,13 +475,13 @@ export default function Home() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center justify-start bg-[#1452F0] hover:bg-[#1146cc] text-white font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">
+                          className={buttonVariants({ variant: 'primary', size: 'full' })}>
                           <Image
                             src="/polymarket_icon.png"
                             alt="Polymarket"
-                            width={32}
-                            height={32}
-                            className="w-8 h-8 mr-3"
+                            width={20}
+                            height={20}
+                            className="w-4 h-4"
                             style={{ filter: 'invert(1)' }}
                           />
                           My Account
