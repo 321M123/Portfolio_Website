@@ -297,7 +297,7 @@ export default function Home() {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="w-full max-w-xs h-[440px] rounded-sm cursor-pointer group"
+                className="w-full max-w-xs h-[480px] rounded-sm cursor-pointer group"
                 style={{ perspective: 1000 }}
                 onClick={() => setFlippedCardId(flippedCardId === project.id ? null : project.id)}>
                 <motion.div
@@ -365,12 +365,12 @@ export default function Home() {
                         {project.year}
                       </span>
                     </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <div>
+                    <div className="p-6 flex flex-col flex-grow min-h-0">
+                      <div className="min-h-0">
                         <h3 className="text-xl font-semibold tracking-tight text-ink mb-2">{project.title}</h3>
-                        <p className="text-muted mb-4 text-sm">{project.description}</p>
+                        <p className="text-muted mb-4 text-sm line-clamp-3">{project.description}</p>
                       </div>
-                      <div className="mt-auto pt-2">
+                      <div className="mt-auto pt-2 shrink-0">
                         <div className="flex flex-wrap gap-1.5">
                           {project.tags.map((tag, index) => (
                             <Badge key={index} variant="secondary" className="px-2">

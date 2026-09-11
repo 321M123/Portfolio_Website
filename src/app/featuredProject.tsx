@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import Shuffle from '@/components/ui/shadcn-io/shuffle';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -15,11 +16,16 @@ const oneSheetProject = {
   },
   description:
     'Onesheet combines institutional-grade fundamental research with automated portfolio tracking, giving our users an all-in-one terminal for investing.',
-  tech: ['TypeScript', 'React', 'Next.js', 'APIs & Scraping', 'VISX', 'Authentication', 'Payments'],
-  stats: [
-    { value: '25+', label: 'Broker Integrations' },
-    { value: '1,000+', label: 'Stocks Covered' },
-    { value: '$12', label: 'Per Month' },
+  tech: [
+    'TS/React',
+    'Agentic data processing & Orchestration',
+    'Next.js',
+    'APIs & Scraping',
+    'VISX',
+    'Authentication',
+    'Payments',
+    'Mobile',
+    'AWS',
   ],
   images: [
     {
@@ -161,7 +167,7 @@ export function FeaturedProjectsSection() {
               Featured Project
             </motion.p>
             <Shuffle
-              text="OneSheet"
+              text="Onesheet"
               shuffleDirection="right"
               duration={0.5}
               animationMode="evenodd"
@@ -311,13 +317,15 @@ export function FeaturedProjectsSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="flex flex-wrap justify-center gap-6">
-              {oneSheetProject.stats.map((stat) => (
-                <div key={stat.label} className="min-w-[120px]">
-                  <div className="text-2xl font-bold tracking-tight text-accent">{stat.value}</div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted mt-1">{stat.label}</div>
-                </div>
-              ))}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Image
+                src="/fintech-cadence-logo.png"
+                alt="Fintech Cadence"
+                width={180}
+                height={36}
+                className="h-8 w-auto"
+              />
+              <p className="text-sm text-muted">Part of Fintech Cadence&apos;s Fintech Hub</p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-2">
