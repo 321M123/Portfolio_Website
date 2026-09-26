@@ -45,8 +45,8 @@ const oneSheetProject = {
     },
   ],
   links: {
-    primary: 'https://onesheet.pro',
-    trial: 'https://app.onesheet.pro/signup',
+    primary: 'https://onesheet.ca',
+    retail: 'https://onesheet.pro',
     kpi: 'https://onesheet.pro/kpi',
   },
 };
@@ -55,9 +55,9 @@ export function FeaturedProjectsSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [displayText, setDisplayText] = useState('Visit onesheet.pro');
+  const [displayText, setDisplayText] = useState('Visit onesheet.ca');
   const [shinePosition, setShinePosition] = useState({ x: 50, y: 50 });
-  const originalText = 'Visit onesheet.pro';
+  const originalText = 'Visit onesheet.ca';
   const cardRef = useRef<HTMLDivElement>(null);
 
   const totalSlides = oneSheetProject.images.length;
@@ -351,11 +351,11 @@ export function FeaturedProjectsSection() {
               </a>
 
               <a
-                href={oneSheetProject.links.trial}
+                href={oneSheetProject.links.retail}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonVariants({ variant: 'outline' })}>
-                Start free trial
+                For retail investors
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>

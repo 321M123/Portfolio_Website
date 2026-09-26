@@ -182,7 +182,7 @@ export default function Home() {
                   <p className="text-muted">
                     <span className="font-bold text-ink">Concordia University</span>
                     <br />
-                    Admitted (Fall 2026 – 2030)
+                    Bachelor of Electrical Engineering (In progress, 2026 – 2029)
                   </p>
                 </AnimatedBorder>
               </div>
@@ -260,7 +260,11 @@ export default function Home() {
                   description="Frontend/Backend dev & APIs (New projects)"
                 />
                 <TechBadge icon={<Atom className="text-accent" />} name="React" description="Web apps" />
-                <TechBadge icon={<Rocket className="text-accent" />} name="Astro" description="Web apps (New projects)" />
+                <TechBadge
+                  icon={<Rocket className="text-accent" />}
+                  name="Astro"
+                  description="Web apps (New projects)"
+                />
                 <TechBadge
                   icon={<Layout className="text-accent" />}
                   name="HTML/CSS & Tailwind"
